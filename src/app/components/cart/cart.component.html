@@ -1,0 +1,41 @@
+<p>cart works!</p>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Votre Panier</mat-card-title>
+  </mat-card-header>
+  <mat-card-content >
+    <table mat-table [dataSource]="cartItems()">
+      <!-- Nom -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let item">{{ item.productName }}</td>
+      </ng-container>
+
+      <!-- Quantité -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantité</th>
+        <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+      </ng-container>
+
+      <!-- Prix -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Prix</th>
+        <td mat-cell *matCellDef="let item">{{ item.price | currency:'EUR' }}</td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-raised-button color="warn" (click)="removeFromCart(item)">
+            Supprimer
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Header et Row -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>

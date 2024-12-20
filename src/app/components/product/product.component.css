@@ -1,0 +1,10 @@
+#product {
+  display: block;
+  width: 250px;
+  height: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 0 grey;
+  background-color: rgb(221, 221, 221);
+  margin: 10px;
+}

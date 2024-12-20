@@ -1,0 +1,21 @@
+<p>product-list works!</p>
+
+<!-- Liste déroulante pour sélectionner une catégorie -->
+<mat-form-field>
+  <mat-label>Catégorie</mat-label>
+  <mat-select (selectionChange)="selectedCategory.set($event.value)">
+    @for (category of categories(); track category) {
+      <mat-option [value]="category"> {{ category }} </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<!-- Liste des produits filtrés -->
+<mat-card id="product-list">
+  @for (product of filteredProducts() ; track product) {
+    <app-product [product]="product" />
+  }
+</mat-card>
+
+
+
