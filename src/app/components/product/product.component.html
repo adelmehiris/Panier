@@ -1,0 +1,17 @@
+<p>product works!</p>
+<mat-card id="product">
+  <mat-card-header>
+    <mat-card-title>
+      {{ product().productName }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{ product().category }} <br>
+    {{ product().price | currency:'EUR'}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addToCart(product())">
+      Ajouter au panier
+    </button>
+  </mat-card-actions>
+</mat-card>
