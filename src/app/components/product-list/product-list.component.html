@@ -11,7 +11,7 @@
 </mat-form-field>
 
 <!-- Liste des produits filtrés -->
-<mat-card id="product-list">
+<mat-card id="product-grid">
   @for (product of filteredProducts() ; track product) {
     <app-product [product]="product" />
   }

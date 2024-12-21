@@ -1,6 +1,6 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IProduct} from '../Interfaces/product.interface';
+import {IProduct} from '../models/product.interface';
 import {Observable, tap} from 'rxjs';
 
 @Injectable({

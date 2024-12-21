@@ -1,0 +1,8 @@
+# Récupère le message du commit
+commit_message=$(cat "$1")
+
+# Vérifie que le message commence par "JIRA-"
+if ! echo "$commit_message" | grep -q "^JIRA-"; then
+  echo "❌ Le message du commit doit commencer par 'JIRA-'."
+  exit 1
+fi

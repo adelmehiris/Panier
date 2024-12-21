@@ -13,11 +13,13 @@
   <button mat-button routerLink = "/cart">
     <mat-icon>shopping_cart</mat-icon>
     Cart
+    <ng-container *ngIf="totalItemCount() > 0" class="cart-counter">
+      {{ totalItemCount() }}
+    </ng-container>
   </button>
   <button mat-raised-button>
     Login
   </button>
 </mat-toolbar>
-
 
 <router-outlet></router-outlet>

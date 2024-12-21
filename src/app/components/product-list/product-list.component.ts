@@ -5,7 +5,7 @@ import {ProductComponent} from '../product/product.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOption, MatSelectModule} from '@angular/material/select';
 import { uniq } from 'lodash';
-import {IProduct} from '../../Interfaces/product.interface';
+import {IProduct} from '../../models/product.interface';
 
 @Component({
   selector: 'app-product-list',
