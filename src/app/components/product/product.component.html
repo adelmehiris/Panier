@@ -1,14 +1,35 @@
 <mat-card id="product-card">
   <mat-card-content>
-    <h2>{{ product().productName }}</h2>
-    {{ product().category }} <br>
-    {{ product().price | currency:'EUR'}}<br>
-    <p class="price"> Prix TTC : {{ calculatePriceTTC(product()) | currency:'EUR' }}</p><br>
-    Quantité en stock : {{ product().quantity || 0 }}
+    <h2 class="product-name">{{ product().productName }}</h2>
+    <p class="category">Catégorie : {{ product().category }}</p>
+    <p class="price">Prix : {{ calculatePriceTTC(product()) | currency: 'EUR' }}</p>
+
+
+    @if (product().quantity > 0) {
+      <p class="in-stock"> Quantité en stock : {{ product().quantity }}</p>
+    } @else {
+      <p class="out-of-stock">Non disponible</p>
+    }
+
+    <br><br>
+
+
   </mat-card-content>
+
   <mat-card-actions>
-    <button mat-raised-button color="primary"  (click)="addToCart()">
-      <mat-icon>add_shopping_cart</mat-icon> Add to Cart
+    <mat-form-field class="quantity-input">
+      <input matInput type="number"
+             [(ngModel)]="selectedQuantity"
+             [value]="product().quantity > 0 ? selectedQuantity : 0"
+             min="1"
+             [max]="product().quantity"
+             [disabled]="product().quantity <= 0"/>
+    </mat-form-field>
+    <button mat-raised-button color="primary"
+            (click)="addToCart()"
+            [disabled]="product().quantity <= 0 || product().quantity < selectedQuantity">
+      <mat-icon>add_shopping_cart</mat-icon>
+      Add to Cart
     </button>
   </mat-card-actions>
 </mat-card>

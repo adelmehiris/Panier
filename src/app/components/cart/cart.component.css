@@ -1,32 +1,77 @@
 .cart-card {
-  min-width: 600px;
   margin: 20px auto;
-}
-.mat-mdc-card-title {
-  font-size: 1.5em;
-  margin: 15px;
-}
-.quantity-input {
-  width: 80px;
-  margin-right: 10px;
-}
-.item-price {
-  font-weight: bold;
-  margin-right: 10px;
-}
-.cart-total {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-top: 20px;
-  text-align: right;
-}
-.mat-mdc-card-actions {
-  display: flex;
-  justify-content: flex-end;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
-.mat-list-item-container {
+.cart-card mat-card-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #3f51b5;
+}
+
+.cart-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cart-card mat-list {
+  border-top: 1px solid #f0f0f0;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.cart-card mat-list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-card mat-list-item span {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.cart-card mat-icon {
+  color: #f44336;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cart-card mat-icon:hover {
+  transform: scale(1.2);
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #333;
+}
+
+.cart-card mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cart-card mat-raised-button {
+  background-color: #ff9800;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.cart-card mat-raised-button:hover {
+  background-color: #e68900;
 }

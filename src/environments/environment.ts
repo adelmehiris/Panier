@@ -1,3 +1,4 @@
 export const environement = {
-  BASE_URL : 'http://localhost:3001',
+  production: false,
+  BASE_URL: 'http://localhost:3001',
 };

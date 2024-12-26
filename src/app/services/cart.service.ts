@@ -1,36 +1,49 @@
-import {computed, Injectable, signal} from '@angular/core';
-import { IProduct } from '../models/product.interface';
+import {computed, inject, Injectable, signal} from '@angular/core';
+import {Product} from '../models/product';
+import {CartItem} from '../models/cart-item';
+import {ProductService} from './product.service';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CartService {
 
-  private cart = signal<IProduct[]>([]);
+  private productService = inject(ProductService);
 
-  addToCart(product: IProduct, quantity: number) {
-    const existingProduct = this.cart().find((item) => item.id === product.id);
-    if (existingProduct) {
-      existingProduct.quantity! += quantity;
+  private cart = signal<CartItem[]>([]);
+  getCartItems = computed(() => this.cart());
+
+  addToCart(product: Product, quantityToAdd: number) {
+    const existingItem = this.cart().find((item) => item.product.id === product.id);
+
+    if (existingItem) {
+      // Mise à jour de la quantité pour un produit existant
       this.cart.update((items) =>
-        items.map((item) =>
-          item.id === product.id ? { ...item, quantity: existingProduct.quantity } : item
+        items.map((item) => item.product.id === product.id
+          ? {...item, quantity: item.quantity + quantityToAdd}
+          : item
         )
       );
     } else {
-      this.cart.update((items) => [...items, { ...product, quantity}]);
+      // Ajout d'un nouveau produit au panier
+      this.cart.update((items) => [...items, {product: product, quantity: quantityToAdd},]);
     }
+
+    // Réduire la quantité en stock du produit
+    product.quantity! -= quantityToAdd;
   }
 
-  getCartItems = computed(() => this.cart());
-
-  removeFromCart(product: IProduct) {
-    this.cart.update((items) => items.filter((item) => item.id !== product.id));
+  removeFromCart(itemToRemove: CartItem) {
+    itemToRemove.product.quantity += itemToRemove.quantity;
+    this.cart.update((items) => items.filter((item) => item.product.id !== itemToRemove.product.id));
   }
 
-  // Obtenir le nombre total d'articles dans le panier
-  getTotalItemCount = computed(() =>
-    this.cart().reduce((total, item) => total + (item.quantity || 1), 0)
-  );
+  getTotalTaxes() {
+    return this.cart().reduce((total, item) => total + (item.quantity * this.productService.getTaxAmount(item.product)), 0);
+  }
+
+  getTotalTTC() {
+    return this.cart().reduce((total, item) => total + (item.quantity * this.productService.getPriceTTC(item.product)), 0);
+  }
 
 }

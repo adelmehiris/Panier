@@ -1,21 +1,57 @@
-import {inject, Injectable, signal} from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IProduct} from '../models/product.interface';
 import {Observable, tap} from 'rxjs';
+import {Product} from '../models/product';
+import {Cacheable} from 'ts-cacheable';
+import {ceil} from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private http = inject(HttpClient);
-  products = signal<IProduct[]>([]);
+
+  constructor(private httpClient: HttpClient) {
+  }
+
+  products = signal<Product[]>([]);
 
   readonly url = 'http://localhost:3001/products';
 
-  getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.url).pipe(
-      tap(products => this.products.set(products))
+  @Cacheable()
+  getProducts(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(this.url).pipe(
+      tap(products => {
+        this.products.set(products);
+      })
     );
+  }
+
+  getTaxRate(product: Product): number {
+    let taxRate = 0;
+
+    switch (product.category) {
+      case 'Food':
+      case 'Medicine':
+        taxRate = 0; // Aucune taxe
+        break;
+      case 'Books':
+        taxRate = 10; // Taxe sur les livres
+        break;
+      default:
+        taxRate = 20; // Taxe standard pour les autres produits
+        break;
+    }
+
+    return taxRate + (product.isImported ? 5 : 0);
+  }
+
+  getTaxAmount(product: Product): number {
+    const calculatedTax = (product.price * this.getTaxRate(product)) / 100;
+    return ceil(calculatedTax * 20) / 20;
+  }
+
+  getPriceTTC(product: Product): number {
+    return product.price + this.getTaxAmount(product);
   }
 
 }

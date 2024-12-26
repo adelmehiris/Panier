@@ -4,8 +4,8 @@ import {ProductService} from '../../services/product.service';
 import {ProductComponent} from '../product/product.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatOption, MatSelectModule} from '@angular/material/select';
-import { uniq } from 'lodash';
-import {IProduct} from '../../models/product.interface';
+import {uniq} from 'lodash';
+import {Product} from '../../models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -19,10 +19,11 @@ import {IProduct} from '../../models/product.interface';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
 
   private productService = inject(ProductService);
-  products = signal<IProduct[]>([]);
+
+  products = signal<Product[]>([]);
   selectedCategory = signal<string>('');
   categories = signal<string[]>([]);
 
@@ -30,11 +31,11 @@ export class ProductListComponent implements OnInit{
     const category = this.selectedCategory();
     return category
       ? this.products().filter((product) => product.category === category)
-      : [];
+      : this.products();
   });
 
   ngOnInit() {
-    // Récupération des produits depuis le service
+
     this.productService.getProducts().subscribe((products) => {
       this.products.set(products);
 

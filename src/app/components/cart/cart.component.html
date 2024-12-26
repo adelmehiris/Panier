@@ -1,68 +1,32 @@
-<p>cart works!</p>
+@if (cartItems().length) {
+  <mat-card class="cart-card">
+    <mat-card-title>Your Shopping Cart</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        @for (item of cartItems(); track item) {
+          <mat-list-item>
+                <span>
+                  <h3>{{ item.quantity }} x {{ item.product.productName }}</h3>
+                  Taxes : {{ getTax(item)| currency: 'EUR':'symbol':'1.0-2' }}
+                  Prix unitaire HT :  {{ getPriceHT(item)| currency: 'EUR':'symbol':'1.0-2' }}
+                  Prix unitaire TTC : {{ getPriceTTC(item)| currency: 'EUR':'symbol':'1.0-2' }}
+                </span>
+            <button mat-icon-button color="warn" (click)="removeFromCart(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-list-item>
+        }
+      </mat-list>
+      <div class="cart-total">
+        Total taxes : {{ getTotalTaxes() | currency: 'EUR':'symbol':'1.0-2' }} <br>
+        Total TTC : {{ getTotalTTC() | currency: 'EUR':'symbol':'1.0-2' }}
+      </div>
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Votre Panier</mat-card-title>
-  </mat-card-header>
-  <mat-card-content >
-    <table mat-table [dataSource]="cartItems()">
-      <!-- Nom -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nom</th>
-        <td mat-cell *matCellDef="let item">{{ item.productName }}</td>
-      </ng-container>
-
-      <!-- Quantité -->
-      <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef>Quantité</th>
-        <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
-      </ng-container>
-
-      <!-- Prix -->
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Prix</th>
-        <td mat-cell *matCellDef="let item">{{ item.price | currency:'EUR' }}</td>
-      </ng-container>
-
-      <!-- Actions -->
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let item">
-          <button mat-raised-button color="warn" (click)="removeFromCart(item)">
-            Supprimer
-          </button>
-        </td>
-      </ng-container>
-
-      <!-- Header et Row -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </mat-card-content>
-
-<mat-card class="cart-card">
-  <mat-card-title>Your Shopping Cart</mat-card-title>
-  <mat-card-content>
-    <mat-list>
-      @for (item of cartItems(); track item) {
-        <mat-list-item>
-          <div matListItemTitle>{{ item.productName }}</div>
-          <div matListItemLine>
-            <div class="mat-list-item-container">
-              <!--<mat-form-field class="quantity-input">
-                <input aria-label="quantity" matInput type="number" [value]="item.quantity"
-                       min="1" (change)="updateQuantity(item, $event)">
-              </mat-form-field>-->
-
-              <span class="item-price">{{ item.price | currency:'EUR'}}</span>
-
-              <button mat-icon-button color="warn" (click)="removeFromCart(item)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
-        </mat-list-item>
-      }
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent">
+        Proceed to Checkout
+      </button>
+    </mat-card-actions>
+  </mat-card>
+}

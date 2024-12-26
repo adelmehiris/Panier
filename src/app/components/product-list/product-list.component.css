@@ -1,7 +1,19 @@
 #product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-items: center;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
-  background: azure;
+  background: white;
+}
+
+.category {
+  margin: 20px 0;
+  width: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  #product-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
 
-.spacer {
-  flex: auto;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .container {
@@ -14,7 +16,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
@@ -26,7 +31,7 @@ body {
   transition: box-shadow 0.3s ease-in-out;
 
   &:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
   }
 }
 

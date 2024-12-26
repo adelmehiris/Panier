@@ -1,24 +1,17 @@
-<mat-toolbar>
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
+<mat-toolbar class="app-toolbar">
+  <button mat-button routerLink="/products">
+    Shop
+    <mat-icon>shoping_bag</mat-icon>
   </button>
-  <button mat-button routerLink = "/home">
-    <mat-icon>home</mat-icon>
-    Home
-  </button>
-  <button mat-button routerLink = "/products">
-    Products
-  </button>
-  <span class="spacer"></span>
-  <button mat-button routerLink = "/cart">
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button routerLink="/cart"
+          [matBadge]="totalItemCount()"
+          [matBadgeHidden]="totalItemCount() === 0">
     <mat-icon>shopping_cart</mat-icon>
-    Cart
-    <ng-container *ngIf="totalItemCount() > 0" class="cart-counter">
-      {{ totalItemCount() }}
-    </ng-container>
   </button>
   <button mat-raised-button>
     Login
+    <mat-icon>login</mat-icon>
   </button>
 </mat-toolbar>
 
