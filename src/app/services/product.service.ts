@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
 import {Product} from '../models/product';
@@ -9,9 +9,8 @@ import {ceil} from 'lodash';
   providedIn: 'root'
 })
 export class ProductService {
-
-  constructor(private httpClient: HttpClient) {
-  }
+  
+  private httpClient = inject(HttpClient);
 
   products = signal<Product[]>([]);
 
