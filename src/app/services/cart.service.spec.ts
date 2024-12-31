@@ -22,14 +22,13 @@ describe('CartService', () => {
     productServiceSpy = TestBed.inject(ProductService) as jasmine.SpyObj<ProductService>;
   });
 
+  afterEach(() => {
+    TestBed.resetTestingModule(); // Réinitialise complètement TestBed
+  });
+
   it('should add a product to the cart', () => {
     const product: Product = {
-      id: 1,
-      productName: 'Product A',
-      price: 100,
-      category: 'Food',
-      isImported: false,
-      quantity: 10,
+      id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10,
     };
 
     cartService.addToCart(product, 2);
@@ -43,12 +42,7 @@ describe('CartService', () => {
 
   it('should update quantity if the product is already in the cart', () => {
     const product: Product = {
-      id: 1,
-      productName: 'Product A',
-      price: 100,
-      category: 'Food',
-      isImported: false,
-      quantity: 10,
+      id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10,
     };
 
     cartService.addToCart(product, 2);
@@ -62,12 +56,7 @@ describe('CartService', () => {
 
   it('should remove a product from the cart', () => {
     const product: Product = {
-      id: 1,
-      productName: 'Product A',
-      price: 100,
-      category: 'Food',
-      isImported: false,
-      quantity: 10,
+      id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10,
     };
 
     cartService.addToCart(product, 2);
@@ -84,21 +73,11 @@ describe('CartService', () => {
 
   it('should calculate total taxes', () => {
     const product1: Product = {
-      id: 1,
-      productName: 'Product A',
-      price: 100,
-      category: 'Food',
-      isImported: false,
-      quantity: 10,
+      id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10,
     };
 
     const product2: Product = {
-      id: 2,
-      productName: 'Product B',
-      price: 200,
-      category: 'Books',
-      isImported: true,
-      quantity: 5,
+      id: 2, productName: 'Product 2', price: 200, category: 'Books', isImported: true, quantity: 5,
     };
 
     productServiceSpy.getTaxAmount.and.callFake((product: Product) => {
@@ -116,21 +95,11 @@ describe('CartService', () => {
 
   it('should calculate total TTC', () => {
     const product1: Product = {
-      id: 1,
-      productName: 'Product A',
-      price: 100,
-      category: 'Food',
-      isImported: false,
-      quantity: 10,
+      id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10,
     };
 
     const product2: Product = {
-      id: 2,
-      productName: 'Product B',
-      price: 200,
-      category: 'Books',
-      isImported: true,
-      quantity: 5,
+      id: 2, productName: 'Product 2', price: 200, category: 'Books', isImported: true, quantity: 5,
     };
 
     productServiceSpy.getPriceTTC.and.callFake((product: Product) => {
@@ -144,5 +113,16 @@ describe('CartService', () => {
 
     const totalTTC = cartService.getTotalTTC();
     expect(totalTTC).toBe(460); // (2 * 110) + (1 * 240)
+  });
+
+  it('should update the quantity of an existing product in the cart', () => {
+    const product = {id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10,};
+    cartService.addToCart(product, 2);
+    cartService.addToCart(product, 3);
+
+    expect(cartService.getCartItems()).toEqual([
+      {product, quantity: 5},
+    ]);
+    expect(product.quantity).toBe(5); // Vérifie la réduction cumulative de stock
   });
 });

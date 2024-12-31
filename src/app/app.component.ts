@@ -30,5 +30,5 @@ export class AppComponent {
   private cartService = inject(CartService);
 
   // Signal pour le compteur d'articles
-  totalItemCount = computed(() => this.cartService.getCartItems().length);
+  totalItemCount = computed(() => this.cartService.getCartItems()?.length);
 }

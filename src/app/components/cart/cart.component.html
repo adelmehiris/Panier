@@ -5,11 +5,11 @@
       <mat-list>
         @for (item of cartItems(); track item) {
           <mat-list-item>
-                <span>
+                <span class="item-cart">
                   <h3>{{ item.quantity }} x {{ item.product.productName }}</h3>
-                  Taxes : {{ getTax(item)| currency: 'EUR':'symbol':'1.0-2' }}
-                  Prix unitaire HT :  {{ getPriceHT(item)| currency: 'EUR':'symbol':'1.0-2' }}
-                  Prix unitaire TTC : {{ getPriceTTC(item)| currency: 'EUR':'symbol':'1.0-2' }}
+                  Taxes : {{ getTax(item)| currency: 'EUR' }}
+                  Prix unitaire HT :  {{ getPriceHT(item)| currency: 'EUR' }}
+                  Prix unitaire TTC : {{ getPriceTTC(item)| currency: 'EUR' }}
                 </span>
             <button mat-icon-button color="warn" (click)="removeFromCart(item)">
               <mat-icon>delete</mat-icon>
@@ -18,8 +18,8 @@
         }
       </mat-list>
       <div class="cart-total">
-        Total taxes : {{ getTotalTaxes() | currency: 'EUR':'symbol':'1.0-2' }} <br>
-        Total TTC : {{ getTotalTTC() | currency: 'EUR':'symbol':'1.0-2' }}
+        Total taxes : {{ getTotalTaxes() | currency: 'EUR' }} <br>
+        Total TTC : {{ getTotalTTC() | currency: 'EUR' }}
       </div>
 
     </mat-card-content>

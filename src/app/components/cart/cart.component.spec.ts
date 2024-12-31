@@ -45,6 +45,10 @@ describe('CartComponent', () => {
     component = fixture.componentInstance;
   });
 
+  afterEach(() => {
+    TestBed.resetTestingModule(); // Réinitialise complètement TestBed
+  });
+
   it('should create the component', () => {
     expect(component).toBeTruthy();
   });
@@ -54,7 +58,7 @@ describe('CartComponent', () => {
       {
         product: {
           id: 1,
-          productName: 'Product A',
+          productName: 'Product 1',
           price: 100,
           category: 'Category A',
           isImported: false,
@@ -65,7 +69,7 @@ describe('CartComponent', () => {
       {
         product: {
           id: 2,
-          productName: 'Product B',
+          productName: 'Product 2',
           price: 200,
           category: 'Category B',
           isImported: true,
@@ -96,7 +100,7 @@ describe('CartComponent', () => {
       {
         product: {
           id: 1,
-          productName: 'Product A',
+          productName: 'Product 1',
           price: 100,
           category: 'Category A',
           isImported: false,

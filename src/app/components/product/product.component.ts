@@ -6,9 +6,9 @@ import {CartService} from '../../services/cart.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatOptionModule} from '@angular/material/core';
-import {MatIcon} from '@angular/material/icon';
-import {MatButton} from '@angular/material/button';
-import {MatInput} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {ProductService} from '../../services/product.service';
 
@@ -20,9 +20,9 @@ import {ProductService} from '../../services/product.service';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    MatIcon,
-    MatButton,
-    MatInput,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
     FormsModule
   ],
   templateUrl: './product.component.html',
@@ -34,8 +34,7 @@ export class ProductComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
 
-  // Signal pour la quantité sélectionnée
-  selectedQuantity: number = 1;
+  selectedQuantity = 1;
 
 
   addToCart() {

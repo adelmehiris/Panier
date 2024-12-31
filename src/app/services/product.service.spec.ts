@@ -25,8 +25,8 @@ describe('ProductService', () => {
   describe('getProducts', () => {
     it('should fetch products from the API and update the products signal', () => {
       const mockProducts: Product[] = [
-        {id: 1, productName: 'Product A', price: 100, category: 'Food', isImported: false, quantity: 10},
-        {id: 2, productName: 'Product B', price: 200, category: 'Books', isImported: true, quantity: 5},
+        {id: 1, productName: 'Product 1', price: 100, category: 'Food', isImported: false, quantity: 10},
+        {id: 2, productName: 'Product 2', price: 200, category: 'Books', isImported: true, quantity: 5},
       ];
 
       service.getProducts().subscribe((products) => {
@@ -191,12 +191,7 @@ describe('ProductService', () => {
 
     it('should round total price including tax to nearest 0.05', () => {
       const product: Product = {
-        id: 4,
-        productName: 'Imported Item',
-        price: 18.99,
-        category: 'Electronics',
-        isImported: true,
-        quantity: 3
+        id: 4, productName: 'Imported Item', price: 18.99, category: 'Electronics', isImported: true, quantity: 3
       };
       expect(service.getPriceTTC(product)).toBe(23.74); // 18.99 + 4.75 (tax rounded)
     });

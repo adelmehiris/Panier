@@ -75,3 +75,7 @@
 .cart-card mat-raised-button:hover {
   background-color: #e68900;
 }
+
+.item-cart {
+  white-space: normal;
+}

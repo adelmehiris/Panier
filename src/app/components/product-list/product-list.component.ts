@@ -35,7 +35,6 @@ export class ProductListComponent implements OnInit {
   });
 
   ngOnInit() {
-
     this.productService.getProducts().subscribe((products) => {
       this.products.set(products);
 
@@ -43,5 +42,4 @@ export class ProductListComponent implements OnInit {
       this.categories.set(uniq(products.map((product) => product.category)));
     });
   }
-
 }

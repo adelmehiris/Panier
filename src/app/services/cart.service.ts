@@ -18,12 +18,7 @@ export class CartService {
 
     if (existingItem) {
       // Mise à jour de la quantité pour un produit existant
-      this.cart.update((items) =>
-        items.map((item) => item.product.id === product.id
-          ? {...item, quantity: item.quantity + quantityToAdd}
-          : item
-        )
-      );
+      existingItem.quantity += quantityToAdd;
     } else {
       // Ajout d'un nouveau produit au panier
       this.cart.update((items) => [...items, {product: product, quantity: quantityToAdd},]);
