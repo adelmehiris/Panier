@@ -36,7 +36,6 @@ export class ProductComponent {
 
   selectedQuantity = 1;
 
-
   addToCart() {
     this.cartService.addToCart(this.product(), this.selectedQuantity);
   }
