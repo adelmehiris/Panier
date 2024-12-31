@@ -4,17 +4,18 @@ import {Observable, tap} from 'rxjs';
 import {Product} from '../models/product';
 import {Cacheable} from 'ts-cacheable';
 import {ceil} from 'lodash';
+import {environement} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
+
   private httpClient = inject(HttpClient);
 
   products = signal<Product[]>([]);
 
-  readonly url = 'http://localhost:3001/products';
+  readonly url = `${environement.BASE_URL}/products`;
 
   @Cacheable()
   getProducts(): Observable<Product[]> {
