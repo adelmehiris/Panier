@@ -1,0 +1,36 @@
+name: Deploy Angular App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Déclenche la pipeline lorsque vous poussez sur la branche "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Vérifiez le code source
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Étape 2 : Installez Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16 # Version de Node.js compatible avec Angular
+
+      # Étape 3 : Installez les dépendances
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 4 : Construisez le projet Angular
+      - name: Build Angular App
+        run: npm run build -- --base-href=/Panier/
+
+      # Étape 5 : Déployez sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/ # Répertoire généré par la commande `ng build`
