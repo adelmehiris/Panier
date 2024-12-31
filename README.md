@@ -2,6 +2,39 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
 
+## Features
+
+### **Product Page**
+
+- Display a list of products with details such as name, price, and category.
+- Add products to a shopping cart with a specified quantity.
+- Dynamically filter products by category.
+- Manage product stock availability, marking out-of-stock items as unavailable.
+
+### **Cart Page**
+
+- View items added to the cart, including:
+  - Product details (name, price, taxes applied).
+  - Quantity adjustments.
+  - Total price and taxes per product and for the cart.
+- Remove items from the cart.
+- Responsive design adapts for both mobile and desktop views.
+
+### **Responsiveness**
+
+- **Desktop**: Displays multiple product cards per row.
+- **Mobile**: Displays a single product card per row.
+
+### **Tax Management**
+
+- Applies dynamic tax rates based on product categories:
+  - **0%** for essential items like food and medicine.
+  - **10%** for books.
+  - **20%** for other categories.
+  - Additional **5%** for imported products.
+
+---
+
 ## Development server
 
 To start a local development server, run:
